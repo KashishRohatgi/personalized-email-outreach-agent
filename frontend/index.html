@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>AI Personalized Outreach Agent</title>
+    <link rel="stylesheet" href="/static/styles.css" />
+  </head>
+  <body>
+    <div class="app-shell">
+      <aside class="sidebar">
+        <div class="brand-block">
+          <div class="brand-mark">AO</div>
+          <div>
+            <p class="eyebrow dark">Workspace</p>
+            <h2>OutreachOS</h2>
+          </div>
+        </div>
+
+        <nav class="nav">
+          <span class="nav-label">Overview</span>
+          <a class="nav-item active" href="#">Dashboard</a>
+          <a class="nav-item" href="#">Campaigns</a>
+          <a class="nav-item" href="#">Profiles</a>
+          <a class="nav-item" href="#">Email flow</a>
+          <a class="nav-item" href="#">Analytics</a>
+        </nav>
+
+        <div class="sidebar-card">
+          <p class="section-kicker dark">AI status</p>
+          <strong>Live pipeline</strong>
+          <span>Research + personalization + approval</span>
+        </div>
+      </aside>
+
+      <main class="main-panel">
+        <header class="topbar">
+          <div class="topbar-search">
+            <span>⌕</span>
+            <input type="text" value="Search prospects, campaigns, emails" aria-label="Search" />
+          </div>
+          <div class="header-actions">
+            <button id="healthButton" class="secondary-btn">Check health</button>
+            <div class="user-pill">
+              <div class="avatar">KS</div>
+              <div>
+                <strong>Kashish</strong>
+                <small>Admin</small>
+              </div>
+            </div>
+          </div>
+        </header>
+
+        <main class="dashboard">
+          <section class="hero panel">
+            <div class="hero-copy">
+              <p class="section-kicker">Project overview</p>
+              <h2>Turn research into tailored outbound campaigns.</h2>
+              <p>
+                This system automates prospect research, personalizes outreach, and manages approval workflows at scale.
+              </p>
+              <div class="hero-actions">
+                <button>Launch campaign</button>
+                <button class="secondary-btn">Review pipeline</button>
+              </div>
+            </div>
+            <div class="hero-visual">
+              <div class="mini-chart">
+                <span class="bar bar-1"></span>
+                <span class="bar bar-2"></span>
+                <span class="bar bar-3"></span>
+                <span class="bar bar-4"></span>
+                <span class="bar bar-5"></span>
+              </div>
+              <div class="score-card">
+                <p>Personalization score</p>
+                <strong>89%</strong>
+                <small>AI-crafted outreach</small>
+              </div>
+            </div>
+          </section>
+
+          <section class="kpis">
+            <article class="panel metric-card">
+              <span>Profiles found</span>
+              <strong id="metricProfiles">0</strong>
+              <small id="metricProfilesNote">No profiles yet</small>
+            </article>
+            <article class="panel metric-card">
+              <span>Campaigns active</span>
+              <strong id="metricCampaigns">0</strong>
+              <small id="metricCampaignsNote">No campaigns yet</small>
+            </article>
+            <article class="panel metric-card">
+              <span>Emails generated</span>
+              <strong id="metricEmails">0</strong>
+              <small id="metricEmailsNote">No email activity</small>
+            </article>
+            <article class="panel metric-card">
+              <span>Approval rate</span>
+              <strong id="metricApproval">0%</strong>
+              <small id="metricApprovalNote">Awaiting review</small>
+            </article>
+          </section>
+
+          <section class="panel workflow-panel">
+            <div class="panel-header">
+              <div>
+                <p class="section-kicker">How it works</p>
+                <h3>End-to-end campaign workflow</h3>
+              </div>
+            </div>
+            <div class="workflow-grid">
+              <div class="step">
+                <span>01</span>
+                <h4>Research</h4>
+                <p>Gather profiles, summaries, relevance, and context from target accounts.</p>
+              </div>
+              <div class="step">
+                <span>02</span>
+                <h4>Match</h4>
+                <p>Filter prospects based on role, company, classification, and intent.</p>
+              </div>
+              <div class="step">
+                <span>03</span>
+                <h4>Generate</h4>
+                <p>Produce subject lines, email copy, warnings, and personalization scores.</p>
+              </div>
+              <div class="step">
+                <span>04</span>
+                <h4>Approve</h4>
+                <p>Review, reject, or adjust drafts before deployment or follow-up.</p>
+              </div>
+            </div>
+          </section>
+
+          <section class="lower-grid">
+            <div class="panel">
+              <div class="panel-header">
+                <div>
+                  <p class="section-kicker">System status</p>
+                  <h3>Live health</h3>
+                </div>
+              </div>
+              <div id="healthStatus" class="status-box">Checking...</div>
+            </div>
+
+            <div class="panel">
+              <div class="panel-header">
+                <div>
+                  <p class="section-kicker">AI access</p>
+                  <h3>Gemini key</h3>
+                </div>
+              </div>
+              <form id="geminiKeyForm" class="compact-form">
+                <label>
+                  Gemini API key
+                  <input type="password" name="api_key" placeholder="Enter your Gemini API key" required />
+                </label>
+                <label>
+                  Model
+                  <select name="model">
+                    <option value="gemini-2.5-flash">gemini-2.5-flash</option>
+                    <option value="gemini-2.0-flash">gemini-2.0-flash</option>
+                  </select>
+                </label>
+                <button type="submit">Save key</button>
+              </form>
+              <div id="geminiKeyStatus" class="status-box subtle">Loading key status...</div>
+            </div>
+
+            <div class="panel">
+              <div class="panel-header">
+                <div>
+                  <p class="section-kicker">Operations</p>
+                  <h3>Create profile</h3>
+                </div>
+              </div>
+              <form id="profileForm" class="compact-form">
+                <label>
+                  Name
+                  <input type="text" name="name" placeholder="Ada Lovelace" required />
+                </label>
+                <label>
+                  Email
+                  <input type="email" name="email" placeholder="ada@example.com" />
+                </label>
+                <button type="submit">Save profile</button>
+              </form>
+            </div>
+
+            <div class="panel">
+              <div class="panel-header">
+                <div>
+                  <p class="section-kicker">Campaign setup</p>
+                  <h3>Create campaign</h3>
+                </div>
+              </div>
+              <form id="campaignForm" class="compact-form">
+                <label>
+                  Campaign name
+                  <input type="text" name="name" placeholder="Spring outreach" required />
+                </label>
+                <label>
+                  Objective
+                  <input type="text" name="objective" placeholder="Research collaboration" />
+                </label>
+                <label>
+                  Sender info
+                  <input type="text" name="sender_info" placeholder="Grace" />
+                </label>
+                <button type="submit">Create campaign</button>
+              </form>
+            </div>
+          </section>
+
+          <section class="panel wide-panel">
+            <div class="panel-header">
+              <div>
+                <p class="section-kicker">Prospect registry</p>
+                <h3>Profiles</h3>
+              </div>
+              <button class="secondary-btn" id="refreshProfiles">Refresh</button>
+            </div>
+            <div id="profilesList" class="card-list"></div>
+          </section>
+
+          <section class="panel wide-panel">
+            <div class="panel-header">
+              <div>
+                <p class="section-kicker">Campaign board</p>
+                <h3>Campaigns</h3>
+              </div>
+              <button class="secondary-btn" id="refreshCampaigns">Refresh</button>
+            </div>
+            <div id="campaignsList" class="card-list"></div>
+          </section>
+
+          <section class="panel wide-panel">
+            <div class="panel-header">
+              <div>
+                <p class="section-kicker">Email pipeline</p>
+                <h3>Generated emails</h3>
+              </div>
+            </div>
+            <div id="emailsList" class="card-list email-list"></div>
+          </section>
+        </main>
+      </main>
+    </div>
+
+    <script src="/static/app.js"></script>
+  </body>
+</html>
